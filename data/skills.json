@@ -1,0 +1,72 @@
+[
+  {
+      "name": "Networking",
+      "description": "Increases ATK by 5 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 5,
+      "duration": 1
+  },
+  {
+      "name": "Technical Knowledge",
+      "description": "Direct attack that deals 10 damage.",
+      "type": "DIRECT_ATTACK",
+      "modifier": 10,
+      "duration": 1
+  },
+  {
+      "name": "Problem Solving",
+      "description": "Increases DEF by 3 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 3,
+      "duration": 1
+  },
+  {
+      "name": "Coding Challenge",
+      "description": "Direct attack that deals 15 damage.",
+      "type": "DIRECT_ATTACK",
+      "modifier": 15,
+      "duration": 1
+  },
+  {
+      "name": "Time Management",
+      "description": "Increases ATK by 3 and DEF by 3 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 3,
+      "duration": 1
+  },
+  {
+      "name": "Communication",
+      "description": "Increases DEF by 5 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 5,
+      "duration": 1
+  },
+  {
+      "name": "Teamwork",
+      "description": "Heals HP by 10.",
+      "type": "DIRECT_ATTACK",
+      "modifier": -10,
+      "duration": 1
+  },
+  {
+      "name": "Adaptability",
+      "description": "Increases ATK by 4 and DEF by 4 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 4,
+      "duration": 1
+  },
+  {
+      "name": "Creativity",
+      "description": "Direct attack that deals 12 damage.",
+      "type": "DIRECT_ATTACK",
+      "modifier": 12,
+      "duration": 1
+  },
+  {
+      "name": "Critical Thinking",
+      "description": "Increases DEF by 7 for one turn.",
+      "type": "TEMPORARY_MODIFIER",
+      "modifier": 7,
+      "duration": 1
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+      "name": "Recruiter",
+      "hp": 50,
+      "atk": 5,
+      "def": 2,
+      "skills": [
+          {
+              "name": "Intimidating Question",
+              "description": "Direct attack that deals 5 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 5,
+              "duration": 1
+          },
+          {
+              "name": "Technical Challenge",
+              "description": "Direct attack that deals 8 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 8,
+              "duration": 1
+          }
+      ]
+  },
+  {
+      "name": "Phone Interviewer",
+      "hp": 40,
+      "atk": 4,
+      "def": 1,
+      "skills": [
+          {
+              "name": "Difficult Question",
+              "description": "Direct attack that deals 4 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 4,
+              "duration": 1
+          },
+          {
+              "name": "Follow-Up Question",
+              "description": "Direct attack that deals 6 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 6,
+              "duration": 1
+          }
+      ]
+  },
+  {
+      "name": "Technical Interviewer",
+      "hp": 70,
+      "atk": 7,
+      "def": 3,
+      "skills": [
+          {
+              "name": "Technical Test",
+              "description": "Direct attack that deals 7 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 7,
+              "duration": 1
+          },
+          {
+              "name": "Problem-Solving Test",
+              "description": "Direct attack that deals 10 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 10,
+              "duration": 1
+          }
+      ]
+  },
+  {
+      "name": "HR Manager",
+      "hp": 60,
+      "atk": 6,
+      "def": 2,
+      "skills": [
+          {
+              "name": "Salary Negotiation",
+              "description": "Direct attack that deals 6 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 6,
+              "duration": 1
+          },
+          {
+              "name": "Behavioral Question",
+              "description": "Direct attack that deals 8 damage.",
+              "type": "DIRECT_ATTACK",
+              "modifier": 8,
+              "duration": 1
+          }
+      ]
+  }
+]

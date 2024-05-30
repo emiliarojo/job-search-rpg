@@ -1,0 +1,96 @@
+[
+  {
+      "name": "Job Fair",
+      "description": "You are at a job fair. Do you want to...",
+      "decisions": [
+          {
+              "text": "Go to a job booth",
+              "pre_battle_text": "You approach the recruiter...",
+              "post_battle_text": "You impressed the recruiter!",
+              "enemies": [
+                  {"name": "Recruiter", "hp": 50, "atk": 5, "def": 2}
+              ],
+              "next_scenario": 1
+          },
+          {
+              "text": "Hand over your CV",
+              "pre_battle_text": "You hand over your CV...",
+              "post_battle_text": "The recruiter takes your CV...",
+              "enemies": [
+                  {"name": "Recruiter", "hp": 50, "atk": 5, "def": 2}
+              ],
+              "next_scenario": 2
+          }
+      ]
+  },
+  {
+      "name": "Phone Interview",
+      "description": "You receive a call for a phone interview. Do you want to...",
+      "decisions": [
+          {
+              "text": "Answer confidently",
+              "pre_battle_text": "You answer the call with confidence...",
+              "post_battle_text": "The interviewer is impressed with your confidence!",
+              "enemies": [
+                  {"name": "Phone Interviewer", "hp": 40, "atk": 4, "def": 1}
+              ],
+              "next_scenario": 3
+          },
+          {
+              "text": "Answer nervously",
+              "pre_battle_text": "You answer the call nervously...",
+              "post_battle_text": "The interviewer senses your nervousness.",
+              "enemies": [
+                  {"name": "Phone Interviewer", "hp": 40, "atk": 4, "def": 1}
+              ],
+              "next_scenario": 3
+          }
+      ]
+  },
+  {
+      "name": "On-site Interview",
+      "description": "You are invited to an on-site interview. Do you want to...",
+      "decisions": [
+          {
+              "text": "Dress professionally",
+              "pre_battle_text": "You dress professionally and head to the interview...",
+              "post_battle_text": "The interviewer is impressed with your appearance!",
+              "enemies": [
+                  {"name": "Technical Interviewer", "hp": 70, "atk": 7, "def": 3}
+              ],
+              "next_scenario": 4
+          },
+          {
+              "text": "Dress casually",
+              "pre_battle_text": "You dress casually and head to the interview...",
+              "post_battle_text": "The interviewer seems unimpressed with your appearance.",
+              "enemies": [
+                  {"name": "Technical Interviewer", "hp": 70, "atk": 7, "def": 3}
+              ],
+              "next_scenario": 4
+          }
+      ]
+  },
+  {
+      "name": "Job Offer",
+      "description": "You receive a job offer. Do you want to...",
+      "decisions": [
+          {
+              "text": "Negotiate salary",
+              "pre_battle_text": "You decide to negotiate the salary...",
+              "post_battle_text": "The HR manager is tough, but you manage to get a better offer!",
+              "enemies": [
+                  {"name": "HR Manager", "hp": 60, "atk": 6, "def": 2}
+              ],
+              "next_scenario": -1
+          },
+          {
+              "text": "Accept the offer",
+              "pre_battle_text": "You accept the job offer...",
+              "post_battle_text": "You start your new job with excitement!",
+              "enemies": [],
+              "next_scenario": -1
+          }
+      ]
+  }
+]
