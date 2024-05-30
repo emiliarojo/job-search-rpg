@@ -4,8 +4,10 @@
 #include "json_loader.h"
 #include "cJSON.h"
 #include "character.h"
+#include "enemy.h"
 
 Skill skills[MAX_SKILLS];
+Enemy enemies[MAX_ENEMIES];
 
 void load_skills(const char *filename) {
     FILE *file = fopen(filename, "r");
@@ -29,7 +31,7 @@ void load_skills(const char *filename) {
     }
 
     int count = cJSON_GetArraySize(json);
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count && i < MAX_SKILLS; i++) {
         cJSON *item = cJSON_GetArrayItem(json, i);
         strcpy(skills[i].name, cJSON_GetObjectItem(item, "name")->valuestring);
         strcpy(skills[i].description, cJSON_GetObjectItem(item, "description")->valuestring);
@@ -83,6 +85,12 @@ void load_enemies(const char *filename) {
             enemies[i].skills[j].duration = cJSON_GetObjectItem(skill_item, "duration")->valueint;
         }
         enemies[i].num_skills = skill_count;
+        printf("Loaded enemy: %s with %d skills\n", enemies[i].name, enemies[i].num_skills); // Debugging output
+
+        // Additional debugging to verify skills
+        for (int j = 0; j < skill_count; j++) {
+            printf("  Skill %d: %s - %s\n", j + 1, enemies[i].skills[j].name, enemies[i].skills[j].description);
+        }
     }
 
     free(data);

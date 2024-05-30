@@ -43,16 +43,22 @@ void execute_player_turn(Character *player, Enemy *enemy, Stack *stack) {
     scanf("%d", &choice);
     choice -= 1;
 
+    if (choice < 0 || choice >= player->num_skills) {
+        printf("Invalid skill choice.\n");
+        return;
+    }
+
     // Apply skill effect
     if (player->skills[choice].type == DIRECT_ATTACK) {
         int damage = (player->atk + player->skills[choice].modifier) - enemy->def;
-        if (damage > 0) {
-            enemy->hp -= damage;
-        } else {
+        if (damage < 0) {
             damage = 0; // Ensure damage is not negative
         }
+        enemy->hp -= damage;
+        printf("Damage dealt to enemy: %d\n", damage); // Debugging output
     } else if (player->skills[choice].type == TEMPORARY_MODIFIER) {
         player->atk += player->skills[choice].modifier;
+        printf("Temporary modifier applied, new player ATK: %d\n", player->atk); // Debugging output
     }
     push(stack, choice);
 
@@ -60,19 +66,28 @@ void execute_player_turn(Character *player, Enemy *enemy, Stack *stack) {
 }
 
 void execute_enemy_turn(Character *player, Enemy *enemy) {
+    printf("Enemy turn. Number of skills: %d\n", enemy->num_skills); // Debugging output
+    if (enemy->num_skills == 0) {
+        printf("Enemy has no skills to use.\n");
+        return;
+    }
+
     int skill_index = rand() % enemy->num_skills;
     Skill skill = enemy->skills[skill_index];
+
+    printf("Enemy is using skill %s\n", skill.name); // Debugging output
 
     int damage = 0;
     if (skill.type == DIRECT_ATTACK) {
         damage = (enemy->atk + skill.modifier) - player->def;
-        if (damage > 0) {
-            player->hp -= damage;
-        } else {
+        if (damage < 0) {
             damage = 0; // Ensure damage is not negative
         }
+        player->hp -= damage;
+        printf("Damage dealt to player: %d\n", damage); // Debugging output
     } else if (skill.type == TEMPORARY_MODIFIER) {
         enemy->atk += skill.modifier;
+        printf("Temporary modifier applied, new enemy ATK: %d\n", enemy->atk); // Debugging output
     }
 
     printf("Enemy uses %s! Your HP is now %d (Damage: %d)\n", skill.name, player->hp, damage);

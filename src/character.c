@@ -27,7 +27,12 @@ void create_character(Character *character) {
         while (!valid_choice) {
             printf("Choose skill %d: ", i + 1);
             scanf("%d", &choice);
-            choice -= 1;
+            choice -= 1; // Adjust for 0-based indexing
+
+            if (choice < 0 || choice >= MAX_SKILLS || strlen(skills[choice].name) == 0) {
+                printf("Invalid choice. Please choose a different skill.\n");
+                continue;
+            }
 
             valid_choice = 1;
             for (int j = 0; j < i; j++) {
