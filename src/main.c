@@ -10,7 +10,6 @@ int main() {
     Scenarios scenarios;
     load_scenarios(&scenarios, "data/scenarios.json");
     load_skills("data/skills.json");
-    load_enemies("data/enemies.json");
 
     printf("Welcome to Job Search RPG!\n");
     create_character(&player);

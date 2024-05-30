@@ -1,96 +1,390 @@
 [
   {
-      "name": "Job Fair",
-      "description": "You are at a job fair. Do you want to...",
-      "decisions": [
+    "name": "Job Fair",
+    "description": "You are at a job fair. Do you want to...",
+    "decisions": [
+      {
+        "text": "Go to a job booth",
+        "pre_battle_text": "You approach the recruiter...",
+        "post_battle_text": "You impressed the recruiter!",
+        "enemies": [
           {
-              "text": "Go to a job booth",
-              "pre_battle_text": "You approach the recruiter...",
-              "post_battle_text": "You impressed the recruiter!",
-              "enemies": [
-                  {"name": "Recruiter", "hp": 50, "atk": 5, "def": 2}
-              ],
-              "next_scenario": 1
-          },
-          {
-              "text": "Hand over your CV",
-              "pre_battle_text": "You hand over your CV...",
-              "post_battle_text": "The recruiter takes your CV...",
-              "enemies": [
-                  {"name": "Recruiter", "hp": 50, "atk": 5, "def": 2}
-              ],
-              "next_scenario": 2
+            "name": "Recruiter",
+            "hp": 50,
+            "atk": 5,
+            "def": 2,
+            "skills": [
+              {
+                "name": "Intimidating Question",
+                "description": "Direct attack that deals 5 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 5,
+                "duration": 0
+              },
+              {
+                "name": "Technical Challenge",
+                "description": "Direct attack that deals 8 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 8,
+                "duration": 0
+              },
+              {
+                "name": "Follow-Up Email",
+                "description": "Increases DEF by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Networking Event",
+                "description": "Increases ATK by 2 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 2,
+                "duration": 1
+              },
+              {
+                "name": "Offer Letter",
+                "description": "Heals HP by 10.",
+                "type": "DIRECT_ATTACK",
+                "modifier": -10,
+                "duration": 0
+              }
+            ]
           }
-      ]
+        ],
+        "next_scenario": 1
+      },
+      {
+        "text": "Hand over your CV",
+        "pre_battle_text": "You hand over your CV...",
+        "post_battle_text": "The recruiter takes your CV...",
+        "enemies": [
+          {
+            "name": "Recruiter",
+            "hp": 50,
+            "atk": 5,
+            "def": 2,
+            "skills": [
+              {
+                "name": "Intimidating Question",
+                "description": "Direct attack that deals 5 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 5,
+                "duration": 0
+              },
+              {
+                "name": "Technical Challenge",
+                "description": "Direct attack that deals 8 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 8,
+                "duration": 0
+              },
+              {
+                "name": "Follow-Up Email",
+                "description": "Increases DEF by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Networking Event",
+                "description": "Increases ATK by 2 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 2,
+                "duration": 1
+              },
+              {
+                "name": "Offer Letter",
+                "description": "Heals HP by 10.",
+                "type": "DIRECT_ATTACK",
+                "modifier": -10,
+                "duration": 0
+              }
+            ]
+          }
+        ],
+        "next_scenario": 2
+      }
+    ]
   },
   {
-      "name": "Phone Interview",
-      "description": "You receive a call for a phone interview. Do you want to...",
-      "decisions": [
+    "name": "Phone Interview",
+    "description": "You receive a call for a phone interview. Do you want to...",
+    "decisions": [
+      {
+        "text": "Answer confidently",
+        "pre_battle_text": "You answer the call with confidence...",
+        "post_battle_text": "The interviewer is impressed with your confidence!",
+        "enemies": [
           {
-              "text": "Answer confidently",
-              "pre_battle_text": "You answer the call with confidence...",
-              "post_battle_text": "The interviewer is impressed with your confidence!",
-              "enemies": [
-                  {"name": "Phone Interviewer", "hp": 40, "atk": 4, "def": 1}
-              ],
-              "next_scenario": 3
-          },
-          {
-              "text": "Answer nervously",
-              "pre_battle_text": "You answer the call nervously...",
-              "post_battle_text": "The interviewer senses your nervousness.",
-              "enemies": [
-                  {"name": "Phone Interviewer", "hp": 40, "atk": 4, "def": 1}
-              ],
-              "next_scenario": 3
+            "name": "Phone Interviewer",
+            "hp": 40,
+            "atk": 4,
+            "def": 1,
+            "skills": [
+              {
+                "name": "Difficult Question",
+                "description": "Direct attack that deals 4 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 4,
+                "duration": 0
+              },
+              {
+                "name": "Follow-Up Question",
+                "description": "Direct attack that deals 6 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 6,
+                "duration": 0
+              },
+              {
+                "name": "Technical Challenge",
+                "description": "Direct attack that deals 8 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 8,
+                "duration": 0
+              },
+              {
+                "name": "Phone Screening",
+                "description": "Increases DEF by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Positive Feedback",
+                "description": "Heals HP by 10.",
+                "type": "DIRECT_ATTACK",
+                "modifier": -10,
+                "duration": 0
+              }
+            ]
           }
-      ]
+        ],
+        "next_scenario": 3
+      },
+      {
+        "text": "Answer nervously",
+        "pre_battle_text": "You answer the call nervously...",
+        "post_battle_text": "The interviewer senses your nervousness.",
+        "enemies": [
+          {
+            "name": "Phone Interviewer",
+            "hp": 40,
+            "atk": 4,
+            "def": 1,
+            "skills": [
+              {
+                "name": "Difficult Question",
+                "description": "Direct attack that deals 4 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 4,
+                "duration": 0
+              },
+              {
+                "name": "Follow-Up Question",
+                "description": "Direct attack that deals 6 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 6,
+                "duration": 0
+              },
+              {
+                "name": "Technical Challenge",
+                "description": "Direct attack that deals 8 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 8,
+                "duration": 0
+              },
+              {
+                "name": "Phone Screening",
+                "description": "Increases DEF by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Positive Feedback",
+                "description": "Heals HP by 10.",
+                "type": "DIRECT_ATTACK",
+                "modifier": -10,
+                "duration": 0
+              }
+            ]
+          }
+        ],
+        "next_scenario": 3
+      }
+    ]
   },
   {
-      "name": "On-site Interview",
-      "description": "You are invited to an on-site interview. Do you want to...",
-      "decisions": [
+    "name": "On-site Interview",
+    "description": "You are invited to an on-site interview. Do you want to...",
+    "decisions": [
+      {
+        "text": "Dress professionally",
+        "pre_battle_text": "You dress professionally and head to the interview...",
+        "post_battle_text": "The interviewer is impressed with your appearance!",
+        "enemies": [
           {
-              "text": "Dress professionally",
-              "pre_battle_text": "You dress professionally and head to the interview...",
-              "post_battle_text": "The interviewer is impressed with your appearance!",
-              "enemies": [
-                  {"name": "Technical Interviewer", "hp": 70, "atk": 7, "def": 3}
-              ],
-              "next_scenario": 4
-          },
-          {
-              "text": "Dress casually",
-              "pre_battle_text": "You dress casually and head to the interview...",
-              "post_battle_text": "The interviewer seems unimpressed with your appearance.",
-              "enemies": [
-                  {"name": "Technical Interviewer", "hp": 70, "atk": 7, "def": 3}
-              ],
-              "next_scenario": 4
+            "name": "Technical Interviewer",
+            "hp": 70,
+            "atk": 7,
+            "def": 3,
+            "skills": [
+              {
+                "name": "Technical Test",
+                "description": "Direct attack that deals 7 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 7,
+                "duration": 0
+              },
+              {
+                "name": "Problem-Solving Test",
+                "description": "Direct attack that deals 10 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 10,
+                "duration": 0
+              },
+              {
+                "name": "Coding Challenge",
+                "description": "Direct attack that deals 12 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 12,
+                "duration": 0
+              },
+              {
+                "name": "System Design",
+                "description": "Increases ATK by 5 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 5,
+                "duration": 1
+              },
+              {
+                "name": "Behavioral Question",
+                "description": "Increases DEF by 4 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 4,
+                "duration": 1
+              }
+            ]
           }
-      ]
+        ],
+        "next_scenario": 4
+      },
+      {
+        "text": "Dress casually",
+        "pre_battle_text": "You dress casually and head to the interview...",
+        "post_battle_text": "The interviewer seems unimpressed with your appearance.",
+        "enemies": [
+          {
+            "name": "Technical Interviewer",
+            "hp": 70,
+            "atk": 7,
+            "def": 3,
+            "skills": [
+              {
+                "name": "Technical Test",
+                "description": "Direct attack that deals 7 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 7,
+                "duration": 0
+              },
+              {
+                "name": "Problem-Solving Test",
+                "description": "Direct attack that deals 10 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 10,
+                "duration": 0
+              },
+              {
+                "name": "Coding Challenge",
+                "description": "Direct attack that deals 12 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 12,
+                "duration": 0
+              },
+              {
+                "name": "System Design",
+                "description": "Increases ATK by 5 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 5,
+                "duration": 1
+              },
+              {
+                "name": "Behavioral Question",
+                "description": "Increases DEF by 4 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 4,
+                "duration": 1
+              }
+            ]
+          }
+        ],
+        "next_scenario": 4
+      }
+    ]
   },
   {
-      "name": "Job Offer",
-      "description": "You receive a job offer. Do you want to...",
-      "decisions": [
+    "name": "Job Offer",
+    "description": "You receive a job offer. Do you want to...",
+    "decisions": [
+      {
+        "text": "Negotiate salary",
+        "pre_battle_text": "You decide to negotiate the salary...",
+        "post_battle_text": "The HR manager is tough, but you manage to get a better offer!",
+        "enemies": [
           {
-              "text": "Negotiate salary",
-              "pre_battle_text": "You decide to negotiate the salary...",
-              "post_battle_text": "The HR manager is tough, but you manage to get a better offer!",
-              "enemies": [
-                  {"name": "HR Manager", "hp": 60, "atk": 6, "def": 2}
-              ],
-              "next_scenario": -1
-          },
-          {
-              "text": "Accept the offer",
-              "pre_battle_text": "You accept the job offer...",
-              "post_battle_text": "You start your new job with excitement!",
-              "enemies": [],
-              "next_scenario": -1
+            "name": "HR Manager",
+            "hp": 60,
+            "atk": 6,
+            "def": 2,
+            "skills": [
+              {
+                "name": "Salary Negotiation",
+                "description": "Direct attack that deals 6 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 6,
+                "duration": 0
+              },
+              {
+                "name": "Behavioral Question",
+                "description": "Direct attack that deals 8 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 8,
+                "duration": 0
+              },
+              {
+                "name": "Offer Counter",
+                "description": "Increases ATK by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Contract Review",
+                "description": "Increases DEF by 3 for one turn.",
+                "type": "TEMPORARY_MODIFIER",
+                "modifier": 3,
+                "duration": 1
+              },
+              {
+                "name": "Final Offer",
+                "description": "Direct attack that deals 10 damage.",
+                "type": "DIRECT_ATTACK",
+                "modifier": 10,
+                "duration": 0
+              }
+            ]
           }
-      ]
+        ],
+        "next_scenario": -1
+      },
+      {
+        "text": "Accept the offer",
+        "pre_battle_text": "You accept the job offer...",
+        "post_battle_text": "You start your new job with excitement!",
+        "enemies": [],
+        "next_scenario": -1
+      }
+    ]
   }
 ]

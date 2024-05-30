@@ -7,7 +7,6 @@
 #include "enemy.h"
 
 Skill skills[MAX_SKILLS];
-Enemy enemies[MAX_ENEMIES];
 
 void load_skills(const char *filename) {
     FILE *file = fopen(filename, "r");
@@ -38,59 +37,6 @@ void load_skills(const char *filename) {
         skills[i].type = strcmp(cJSON_GetObjectItem(item, "type")->valuestring, "TEMPORARY_MODIFIER") == 0 ? TEMPORARY_MODIFIER : DIRECT_ATTACK;
         skills[i].modifier = cJSON_GetObjectItem(item, "modifier")->valueint;
         skills[i].duration = cJSON_GetObjectItem(item, "duration")->valueint;
-    }
-
-    free(data);
-    cJSON_Delete(json);
-}
-
-void load_enemies(const char *filename) {
-    FILE *file = fopen(filename, "r");
-    if (!file) {
-        perror("Failed to open file");
-        return;
-    }
-
-    fseek(file, 0, SEEK_END);
-    long length = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *data = (char *)malloc(length + 1);
-    fread(data, 1, length, file);
-    fclose(file);
-
-    cJSON *json = cJSON_Parse(data);
-    if (!json) {
-        perror("Failed to parse JSON");
-        free(data);
-        return;
-    }
-
-    int count = cJSON_GetArraySize(json);
-    for (int i = 0; i < count && i < MAX_ENEMIES; i++) {
-        cJSON *item = cJSON_GetArrayItem(json, i);
-        strcpy(enemies[i].name, cJSON_GetObjectItem(item, "name")->valuestring);
-        enemies[i].hp = cJSON_GetObjectItem(item, "hp")->valueint;
-        enemies[i].atk = cJSON_GetObjectItem(item, "atk")->valueint;
-        enemies[i].def = cJSON_GetObjectItem(item, "def")->valueint;
-
-        // Load enemy skills
-        cJSON *skills_json = cJSON_GetObjectItem(item, "skills");
-        int skill_count = cJSON_GetArraySize(skills_json);
-        for (int j = 0; j < skill_count && j < MAX_ENEMY_SKILLS; j++) {
-            cJSON *skill_item = cJSON_GetArrayItem(skills_json, j);
-            strcpy(enemies[i].skills[j].name, cJSON_GetObjectItem(skill_item, "name")->valuestring);
-            strcpy(enemies[i].skills[j].description, cJSON_GetObjectItem(skill_item, "description")->valuestring);
-            enemies[i].skills[j].type = strcmp(cJSON_GetObjectItem(skill_item, "type")->valuestring, "TEMPORARY_MODIFIER") == 0 ? TEMPORARY_MODIFIER : DIRECT_ATTACK;
-            enemies[i].skills[j].modifier = cJSON_GetObjectItem(skill_item, "modifier")->valueint;
-            enemies[i].skills[j].duration = cJSON_GetObjectItem(skill_item, "duration")->valueint;
-        }
-        enemies[i].num_skills = skill_count;
-        printf("Loaded enemy: %s with %d skills\n", enemies[i].name, enemies[i].num_skills); // Debugging output
-
-        // Additional debugging to verify skills
-        for (int j = 0; j < skill_count; j++) {
-            printf("  Skill %d: %s - %s\n", j + 1, enemies[i].skills[j].name, enemies[i].skills[j].description);
-        }
     }
 
     free(data);
@@ -148,6 +94,25 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
                 decision->enemies[k].hp = cJSON_GetObjectItem(enemy_json, "hp")->valueint;
                 decision->enemies[k].atk = cJSON_GetObjectItem(enemy_json, "atk")->valueint;
                 decision->enemies[k].def = cJSON_GetObjectItem(enemy_json, "def")->valueint;
+
+                // Load enemy skills directly from the scenario JSON
+                cJSON *skills_json = cJSON_GetObjectItem(enemy_json, "skills");
+                int skill_count = cJSON_GetArraySize(skills_json);
+                for (int s = 0; s < skill_count && s < MAX_ENEMY_SKILLS; s++) {
+                    cJSON *skill_item = cJSON_GetArrayItem(skills_json, s);
+                    strcpy(decision->enemies[k].skills[s].name, cJSON_GetObjectItem(skill_item, "name")->valuestring);
+                    strcpy(decision->enemies[k].skills[s].description, cJSON_GetObjectItem(skill_item, "description")->valuestring);
+                    decision->enemies[k].skills[s].type = strcmp(cJSON_GetObjectItem(skill_item, "type")->valuestring, "TEMPORARY_MODIFIER") == 0 ? TEMPORARY_MODIFIER : DIRECT_ATTACK;
+                    decision->enemies[k].skills[s].modifier = cJSON_GetObjectItem(skill_item, "modifier")->valueint;
+                    decision->enemies[k].skills[s].duration = cJSON_GetObjectItem(skill_item, "duration")->valueint;
+                }
+                decision->enemies[k].num_skills = skill_count;
+
+                // Debugging to verify the enemy assignment in the scenario
+                // printf("Scenario Enemy: %s with %d skills\n", decision->enemies[k].name, decision->enemies[k].num_skills);
+                // for (int s = 0; s < decision->enemies[k].num_skills; s++) {
+                //     printf("  Skill %d: %s - %s\n", s + 1, decision->enemies[k].skills[s].name, decision->enemies[k].skills[s].description);
+                // }
             }
 
             decision->next_scenario = cJSON_GetObjectItem(decision_json, "next_scenario")->valueint;
