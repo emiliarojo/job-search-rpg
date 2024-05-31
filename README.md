@@ -103,10 +103,7 @@ job-search-rpg/
 1. **Data Loading:**
    - Character, scenarios, skills, and enemies are loaded from JSON files.
 
-2. **Execution Time Analysis:**
-   - Key functionalities involving data structures and algorithms have been analyzed for execution time.
-
-3. **Unit Tests:**
+2. **Unit Tests:**
    - Implemented unit tests for critical functions using data structures.
 
 
