@@ -11,7 +11,7 @@ void create_character(Character *character) {
     character->atk = 10;
     character->def = 10;
 
-    int chosen_skills[4] = { -1, -1, -1, -1 }; // Array to store chosen skill indices
+    int chosen_skills[4] = { -1, -1, -1, -1 };
 
     printf("Choose 4 skills for your character:\n");
     for (int i = 0; i < MAX_SKILLS; i++) {
@@ -27,7 +27,7 @@ void create_character(Character *character) {
         while (!valid_choice) {
             printf("Choose skill %d: ", i + 1);
             scanf("%d", &choice);
-            choice -= 1; // Adjust for 0-based indexing
+            choice -= 1;
 
             if (choice < 0 || choice >= MAX_SKILLS || strlen(skills[choice].name) == 0) {
                 printf("Invalid choice. Please choose a different skill.\n");

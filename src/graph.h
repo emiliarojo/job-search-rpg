@@ -1,15 +1,22 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#define MAX_NODES 4
+#include "scenario.h"
+
+typedef struct GraphNode {
+    Scenario scenario;
+    struct GraphNode* next[2];
+} GraphNode;
 
 typedef struct {
-    int adj_matrix[MAX_NODES][MAX_NODES];
-    int num_nodes;
-} Graph;
+    GraphNode* head;
+    int size;
+} ScenarioGraph;
 
-void init_graph(Graph *graph, int num_nodes);
-void add_edge(Graph *graph, int src, int dest);
-int *get_neighbors(Graph *graph, int node, int *num_neighbors);
+void initialize_graph(ScenarioGraph* graph);
+GraphNode* create_graph_node(Scenario* scenario);
+void add_graph_edge(GraphNode* from, GraphNode* to1, GraphNode* to2);
+void load_scenarios_into_graph(ScenarioGraph* graph, const char* filename);
+GraphNode* get_next_scenario(GraphNode* current, int decision_index);
 
 #endif

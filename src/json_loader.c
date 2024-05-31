@@ -65,6 +65,8 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
     }
 
     int scenario_count = cJSON_GetArraySize(json);
+    scenarios->scenario_count = scenario_count;
+
     for (int i = 0; i < scenario_count; i++) {
         cJSON *scenario_json = cJSON_GetArrayItem(json, i);
         Scenario *scenario = &scenarios->scenario_list[i];
@@ -95,7 +97,6 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
                 decision->enemies[k].atk = cJSON_GetObjectItem(enemy_json, "atk")->valueint;
                 decision->enemies[k].def = cJSON_GetObjectItem(enemy_json, "def")->valueint;
 
-                // Load enemy skills directly from the scenario JSON
                 cJSON *skills_json = cJSON_GetObjectItem(enemy_json, "skills");
                 int skill_count = cJSON_GetArraySize(skills_json);
                 for (int s = 0; s < skill_count && s < MAX_ENEMY_SKILLS; s++) {
@@ -107,12 +108,6 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
                     decision->enemies[k].skills[s].duration = cJSON_GetObjectItem(skill_item, "duration")->valueint;
                 }
                 decision->enemies[k].num_skills = skill_count;
-
-                // Debugging to verify the enemy assignment in the scenario
-                // printf("Scenario Enemy: %s with %d skills\n", decision->enemies[k].name, decision->enemies[k].num_skills);
-                // for (int s = 0; s < decision->enemies[k].num_skills; s++) {
-                //     printf("  Skill %d: %s - %s\n", s + 1, decision->enemies[k].skills[s].name, decision->enemies[k].skills[s].description);
-                // }
             }
 
             decision->next_scenario = cJSON_GetObjectItem(decision_json, "next_scenario")->valueint;

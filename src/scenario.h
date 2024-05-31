@@ -24,6 +24,7 @@ typedef struct {
 
 typedef struct {
     Scenario scenario_list[4];
+    int scenario_count;
 } Scenarios;
 
 void load_scenarios(Scenarios *scenarios, const char *filename);
