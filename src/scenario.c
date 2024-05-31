@@ -4,7 +4,6 @@
 #include "json_loader.h"
 #include "battle.h"
 
-// External declaration of the enemies array
 extern Enemy enemies[MAX_ENEMIES];
 
 // Function to navigate through a scenario
@@ -35,9 +34,10 @@ int navigate_scenario(Scenarios *scenarios, Character *player, int current_scena
 
     // If there are enemies in the decision, initiate a battle
     if (decision->num_enemies > 0) {
-        Enemy *battle_enemy = &decision->enemies[0];
-
-        initiate_battle(player, battle_enemy);
+        for (int i = 0; i < decision->num_enemies; i++) {
+            Enemy *battle_enemy = &decision->enemies[i];
+            initiate_battle(player, battle_enemy);
+        }
         printf("%s\n", decision->post_battle_text);
     }
 

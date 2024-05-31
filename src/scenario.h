@@ -36,4 +36,4 @@ void load_scenarios(Scenarios *scenarios, const char *filename);
 // Function to navigate through a scenario
 int navigate_scenario(Scenarios *scenarios, Character *player, int current_scenario);
 
-#endif
+#endif // SCENARIO_H
