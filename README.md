@@ -10,7 +10,6 @@
 6. [Features](#features)
 7. [Data Structures and Algorithms](#data-structures-and-algorithms)
 8. [Unit Tests](#unit-tests)
-9. [Usage Tracking](#usage-tracking)
 
 ## Introduction
 
@@ -110,8 +109,6 @@ job-search-rpg/
 3. **Unit Tests:**
    - Implemented unit tests for critical functions using data structures.
 
-4. **Usage Tracking Dictionary:**
-   - Implemented a dictionary to track the usage count of skills.
 
 ### Optional Objectives
 
@@ -130,8 +127,6 @@ job-search-rpg/
 3. **Stack:**
    - Used for the "Time Strike" move to repeat previous actions.
 
-4. **Dictionary:**
-   - Used for tracking skill usage.
 
 ## Unit Tests
 
