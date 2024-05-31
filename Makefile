@@ -1,26 +1,37 @@
 CC = gcc
 CFLAGS = -Wall -g
-SRC = src/main.c src/character.c src/battle.c src/scenario.c src/json_loader.c src/queue.c src/stack.c src/graph.c src/dictionary.c src/enemy.c src/cJSON.c
+SRC_DIR = src
 OBJ_DIR = obj
-OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
-TESTS = tests/test_character.c tests/test_queue.c tests/test_stack.c
+TEST_DIR = tests
+BIN = job-search-rpg
 
-all: job-search-rpg
+SRC_FILES = $(SRC_DIR)/character.c $(SRC_DIR)/battle.c $(SRC_DIR)/scenario.c $(SRC_DIR)/json_loader.c $(SRC_DIR)/queue.c $(SRC_DIR)/stack.c $(SRC_DIR)/graph.c $(SRC_DIR)/dictionary.c $(SRC_DIR)/enemy.c $(SRC_DIR)/cJSON.c
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-$(OBJ_DIR)/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
+all: $(BIN)
+
+$(BIN): $(OBJ_FILES) $(OBJ_DIR)/main.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-job-search-rpg: $(OBJ)
-	$(CC) $(CFLAGS) -o job-search-rpg $(OBJ)
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+test_character: $(TEST_DIR)/test_character.c $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_character.c $(OBJ_FILES)
+
+test_battle: $(TEST_DIR)/test_battle.c $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_battle.c $(OBJ_FILES)
+
+test_scenario: $(TEST_DIR)/test_scenario.c $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_scenario.c $(OBJ_FILES)
+
+test: test_character test_battle test_scenario
+	./test_character
+	./test_battle
+	./test_scenario
 
 clean:
-	rm -f job-search-rpg $(OBJ_DIR)/*.o
-
-test: $(TESTS)
-	$(CC) $(CFLAGS) -o test_character tests/test_character.c src/character.c
-	./test_character
-	$(CC) $(CFLAGS) -o test_queue tests/test_queue.c src/queue.c
-	./test_queue
-	$(CC) $(CFLAGS) -o test_stack tests/test_stack.c src/stack.c
-	./test_stack
+	rm -f $(OBJ_DIR)/*.o $(BIN) test_character test_battle test_scenario

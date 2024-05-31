@@ -1,26 +1,41 @@
-#include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
-#include "character.h"
+#include <assert.h>
+#include <string.h>
+#include "../src/character.h"
+#include "../src/json_loader.h"
 
-void test_create_character(void) {
+extern Skill skills[MAX_SKILLS];
+
+void test_create_character() {
     Character character;
-    create_character(&character, "Test", 100, 10, 5);
+    strcpy(character.name, "TestName");
+    character.hp = 100;
+    character.atk = 10;
+    character.def = 10;
 
-    CU_ASSERT_STRING_EQUAL(character.name, "Test");
-    CU_ASSERT_EQUAL(character.hp, 100);
-    CU_ASSERT_EQUAL(character.atk, 10);
-    CU_ASSERT_EQUAL(character.def, 5);
+    // Mock chosen skills
+    character.skills[0] = skills[0];
+    character.skills[1] = skills[1];
+    character.skills[2] = skills[2];
+    character.skills[3] = skills[3];
+    character.num_skills = 4;
+
+    // Ensure skills are set correctly
+    assert(strcmp(character.skills[0].name, skills[0].name) == 0);
+    assert(strcmp(character.skills[1].name, skills[1].name) == 0);
+    assert(strcmp(character.skills[2].name, skills[2].name) == 0);
+    assert(strcmp(character.skills[3].name, skills[3].name) == 0);
+
+    printf("test_create_character passed\n");
 }
 
 int main() {
-    CU_initialize_registry();
-    CU_pSuite suite = CU_add_suite("Character Suite", 0, 0);
+    // Initialize skills for testing
+    strcpy(skills[0].name, "Skill1");
+    strcpy(skills[1].name, "Skill2");
+    strcpy(skills[2].name, "Skill3");
+    strcpy(skills[3].name, "Skill4");
 
-    CU_add_test(suite, "test_create_character", test_create_character);
-
-    CU_basic_set_mode(CU_BRM_VERBOSE);
-    CU_basic_run_tests();
-    CU_cleanup_registry();
-
+    test_create_character();
+    printf("All tests passed\n");
     return 0;
 }

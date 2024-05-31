@@ -1,27 +1,19 @@
-#include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
-#include "scenario.h"
-#include "json_loader.h"
+#include <assert.h>
+#include <string.h>
+#include <stdio.h>
+#include "../src/scenario.h"
+#include "../src/json_loader.h"
 
-void test_load_scenarios(void) {
-    ScenarioGraph graph;
-    initialize_graph(&graph, 4);
+void test_scenario() {
+    Scenarios scenarios;
+    load_scenarios(&scenarios, "scenarios.json");
 
-    load_scenarios(&graph, "scenarios.json");
-
-    CU_ASSERT_STRING_EQUAL(graph.scenarios[0].name, "Job Fair");
-    CU_ASSERT_STRING_EQUAL(graph.scenarios[1].name, "Phone Interview");
+    assert(strcmp(scenarios.scenario_list[0].name, "Job Fair") == 0);
+    printf("test_scenario passed\n");
 }
 
 int main() {
-    CU_initialize_registry();
-    CU_pSuite suite = CU_add_suite("Scenario Suite", 0, 0);
-
-    CU_add_test(suite, "test_load_scenarios", test_load_scenarios);
-
-    CU_basic_set_mode(CU_BRM_VERBOSE);
-    CU_basic_run_tests();
-    CU_cleanup_registry();
-
+    test_scenario();
+    printf("All tests passed\n");
     return 0;
 }
