@@ -7,6 +7,8 @@
 #include "graph.h"
 
 int main() {
+    printf("Welcome to Job Search RPG!\n");
+
     ScenarioGraph graph;
     initialize_graph(&graph);
     Scenarios scenarios;
@@ -45,6 +47,6 @@ int main() {
         current_node = get_next_scenario(current_node, decision - 1);
     }
 
-    printf("Thank you for playing Job Search RPG!\n");
+    printf("Thank you for playing!\n");
     return 0;
 }

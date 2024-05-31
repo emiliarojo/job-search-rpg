@@ -54,7 +54,6 @@ job-search-rpg/
 │
 ├── data/
 │   ├── scenarios.json
-│   ├── enemies.json
 │   └── skills.json
 │
 ├── Makefile
