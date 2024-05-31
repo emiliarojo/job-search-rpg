@@ -3,9 +3,10 @@
 
 #include "character.h"
 
-#define MAX_ENEMIES 10
-#define MAX_ENEMY_SKILLS 4
+#define MAX_ENEMIES 10 // Maximum number of enemies in the game
+#define MAX_ENEMY_SKILLS 4 // Maximum number of skills an enemy can have
 
+// Definition of the Enemy structure
 typedef struct {
     char name[50];
     int hp;
@@ -15,6 +16,7 @@ typedef struct {
     int num_skills;
 } Enemy;
 
+// External declaration of the enemies array
 extern Enemy enemies[MAX_ENEMIES];
 
 #endif

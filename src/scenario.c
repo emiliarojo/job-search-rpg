@@ -4,20 +4,27 @@
 #include "json_loader.h"
 #include "battle.h"
 
+// External declaration of the enemies array
 extern Enemy enemies[MAX_ENEMIES];
 
+// Function to navigate through a scenario
 int navigate_scenario(Scenarios *scenarios, Character *player, int current_scenario) {
     Scenario *scenario = &scenarios->scenario_list[current_scenario];
+
+    // Display the current scenario's name and description
     printf("%s: %s\n", scenario->name, scenario->description);
 
+    // Display the available decisions
     for (int i = 0; i < scenario->num_decisions; i++) {
         printf("%d. %s\n", i + 1, scenario->decisions[i].text);
     }
 
+    // Get the player's choice
     int choice;
     scanf("%d", &choice);
     choice -= 1;
 
+    // Validate the player's choice
     if (choice < 0 || choice >= scenario->num_decisions) {
         printf("Invalid choice.\n");
         return current_scenario;
@@ -26,18 +33,14 @@ int navigate_scenario(Scenarios *scenarios, Character *player, int current_scena
     Decision *decision = &scenario->decisions[choice];
     printf("%s\n", decision->pre_battle_text);
 
+    // If there are enemies in the decision, initiate a battle
     if (decision->num_enemies > 0) {
         Enemy *battle_enemy = &decision->enemies[0];
-
-        // Debugging
-        // printf("Battle Enemy: %s with %d skills\n", battle_enemy->name, battle_enemy->num_skills);
-        // for (int i = 0; i < battle_enemy->num_skills; i++) {
-        //     printf("  Skill %d: %s - %s\n", i + 1, battle_enemy->skills[i].name, battle_enemy->skills[i].description);
-        // }
 
         initiate_battle(player, battle_enemy);
         printf("%s\n", decision->post_battle_text);
     }
 
+    // Return the next scenario index
     return decision->next_scenario;
 }

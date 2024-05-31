@@ -6,8 +6,10 @@
 #include "character.h"
 #include "enemy.h"
 
+// Array to hold all possible skills
 Skill skills[MAX_SKILLS];
 
+// Function to load skills from a JSON file
 void load_skills(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -15,6 +17,7 @@ void load_skills(const char *filename) {
         return;
     }
 
+    // Read the file into a buffer
     fseek(file, 0, SEEK_END);
     long length = ftell(file);
     fseek(file, 0, SEEK_SET);
@@ -22,6 +25,7 @@ void load_skills(const char *filename) {
     fread(data, 1, length, file);
     fclose(file);
 
+    // Parse the JSON data
     cJSON *json = cJSON_Parse(data);
     if (!json) {
         perror("Failed to parse JSON");
@@ -29,6 +33,7 @@ void load_skills(const char *filename) {
         return;
     }
 
+    // Load skills from JSON array
     int count = cJSON_GetArraySize(json);
     for (int i = 0; i < count && i < MAX_SKILLS; i++) {
         cJSON *item = cJSON_GetArrayItem(json, i);
@@ -43,6 +48,7 @@ void load_skills(const char *filename) {
     cJSON_Delete(json);
 }
 
+// Function to load scenarios from a JSON file
 void load_scenarios(Scenarios *scenarios, const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -50,6 +56,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
         return;
     }
 
+    // Read the file into a buffer
     fseek(file, 0, SEEK_END);
     long length = ftell(file);
     fseek(file, 0, SEEK_SET);
@@ -57,6 +64,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
     fread(data, 1, length, file);
     fclose(file);
 
+    // Parse the JSON data
     cJSON *json = cJSON_Parse(data);
     if (!json) {
         perror("Failed to parse JSON");
@@ -64,6 +72,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
         return;
     }
 
+    // Load scenarios from JSON array
     int scenario_count = cJSON_GetArraySize(json);
     scenarios->scenario_count = scenario_count;
 
@@ -71,6 +80,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
         cJSON *scenario_json = cJSON_GetArrayItem(json, i);
         Scenario *scenario = &scenarios->scenario_list[i];
 
+        // Load scenario details
         strcpy(scenario->name, cJSON_GetObjectItem(scenario_json, "name")->valuestring);
         strcpy(scenario->description, cJSON_GetObjectItem(scenario_json, "description")->valuestring);
 
@@ -82,6 +92,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
             cJSON *decision_json = cJSON_GetArrayItem(decisions_json, j);
             Decision *decision = &scenario->decisions[j];
 
+            // Load decision details
             strcpy(decision->text, cJSON_GetObjectItem(decision_json, "text")->valuestring);
             strcpy(decision->pre_battle_text, cJSON_GetObjectItem(decision_json, "pre_battle_text")->valuestring);
             strcpy(decision->post_battle_text, cJSON_GetObjectItem(decision_json, "post_battle_text")->valuestring);
@@ -90,6 +101,7 @@ void load_scenarios(Scenarios *scenarios, const char *filename) {
             int enemy_count = cJSON_GetArraySize(enemies_json);
             decision->num_enemies = enemy_count;
 
+            // Load enemies for the decision
             for (int k = 0; k < enemy_count; k++) {
                 cJSON *enemy_json = cJSON_GetArrayItem(enemies_json, k);
                 strcpy(decision->enemies[k].name, cJSON_GetObjectItem(enemy_json, "name")->valuestring);
