@@ -1,141 +1,117 @@
 # Job Search RPG
 
 ## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Team Members](#team-members)
-3. [Game Description](#game-description)
-4. [Project Structure](#project-structure)
-5. [How to Compile and Run](#how-to-compile-and-run)
-6. [Features](#features)
-7. [Data Structures and Algorithms](#data-structures-and-algorithms)
-8. [Unit Tests](#unit-tests)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Game Mechanics](#game-mechanics)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Introduction
+**Job Search RPG** is an interactive text-based game where you navigate through various job search scenarios, make strategic decisions, and battle recruiters and interviewers. Utilize your skills to defeat enemies and progress through the game, ultimately landing your dream job.
 
-Job Search RPG is a turn-based role-playing game developed for the Data Structures and Algorithms II course. The game runs on the terminal and is developed in C. Players navigate through different scenarios, make decisions, and engage in battles using a character with unique skills.
+## Features
+- Interactive text-based gameplay
+- Multiple job search scenarios and decisions
+- Strategic battle system with skills and modifiers
+- Save and load game functionality
+- Unit tests to ensure code reliability
 
-## Game Description
+## Setup
+### Prerequisites
+Ensure you have the following installed:
+- GCC (GNU Compiler Collection)
+- Make
 
-In Job Search RPG, players assume the role of a job seeker navigating various scenarios related to job searching and interviews. The game involves creating a character, selecting skills, and battling different types of enemies (recruiters, interviewers, HR managers) to progress through the story.
+### Installation
+1. Clone the repository:
+    ```
+    git clone https://github.com/emiliarojo/job-search-rpg.git
+    cd job-search-rpg
+    ```
 
-## Project Structure
+2. Compile the game:
+    ```
+    make
+    ```
 
-```
+### Directory Structure
+```plaintext
 job-search-rpg/
-│
+├── data/
+│   ├── scenarios.json
+│   └── skills.json
+├── doc/
+├── obj/
 ├── src/
-│   ├── main.c
-│   ├── character.c
-│   ├── character.h
 │   ├── battle.c
 │   ├── battle.h
-│   ├── scenario.c
-│   ├── scenario.h
-│   ├── json_loader.c
-│   ├── json_loader.h
-│   ├── queue.c
-│   ├── queue.h
-│   ├── stack.c
-│   ├── stack.h
-│   ├── graph.c
-│   ├── graph.h
+│   ├── character.c
+│   ├── character.h
+│   ├── cJSON.c
+│   ├── cJSON.h
 │   ├── dictionary.c
 │   ├── dictionary.h
 │   ├── enemy.c
 │   ├── enemy.h
-│   ├── cJSON.c
-|   └── cJSON.h
-│
+│   ├── graph.c
+│   ├── graph.h
+│   ├── json_loader.c
+│   ├── json_loader.h
+│   ├── main.c
+│   ├── queue.c
+│   ├── queue.h
+│   ├── scenario.c
+│   ├── scenario.h
+│   ├── stack.c
+│   └── stack.h
 ├── tests/
-│   ├── test_character.c
 │   ├── test_battle.c
-│   └── test_scenario.c
-│
-├── data/
-│   ├── scenarios.json
-│   └── skills.json
-│
+│   ├── test_character.c
+│   ├── test_queue.c
+│   ├── test_scenario.c
+│   └── test_stack.c
 ├── Makefile
-└── README.md
+├── README.md
+├── savegame.txt
+└── ...
 ```
 
-## How to Compile and Run
+## Usage
+To start the game, run the compiled binary:
+```
+./job-search-rpg
+```
 
-1. **Compile the game:**
-   ```sh
-   make
-   ```
+Follow the on-screen prompts to create your character, navigate through scenarios, and engage in battles.
 
-2. **Run the game:**
-   ```sh
-   ./job-search-rpg
-   ```
+## Game Mechanics
+### Character Creation
+- Choose a name for your character.
+- Select 4 out of 10 possible skills.
 
-3. **Run the unit tests:**
-   ```sh
-   make test
-   ```
+### Skills
+Skills have different effects such as increasing attack (ATK), defense (DEF), or dealing direct damage.
 
-## Features
+### Scenarios
+Navigate through various job search scenarios. Each scenario presents different decisions and potential battles.
 
-### Mandatory Objectives
+### Battles
+Engage in turn-based battles with recruiters and interviewers. Use your skills strategically to defeat them.
 
-1. **Character Creation:**
-   - Users can create a character with attributes such as name, HP, ATK, DEF, and a set of 4 skills.
-
-2. **Scenarios and Narrative:**
-   - The game includes 4 interconnected scenarios, each presenting a narrative and decisions affecting the story.
-
-3. **Graph-Based World Navigation:**
-   - Scenarios are connected in a graph structure allowing navigation between them.
-
-4. **Turn-Based Battle System:**
-   - Implemented a queue-based turn order system for battles.
-   - Includes a special move "Time Strike" using a stack to repeat a previous move with double power.
-
-5. **Enemy Types:**
-   - Multiple types of enemies with unique attacks are implemented.
-
-### Desirable Objectives
-
-1. **Data Loading:**
-   - Character, scenarios, skills, and enemies are loaded from JSON files.
-
-2. **Unit Tests:**
-   - Implemented unit tests for critical functions using data structures.
-
-
-### Optional Objectives
-
-1. **Improved UI/UX:**
-   - Enhanced user experience through clear prompts and feedback.
-
-## Data Structures and Algorithms
-
-1. **Graph:**
-   - Used for scenario navigation.
-   - Implemented as an adjacency list.
-
-2. **Queue:**
-   - Used for managing turn order in battles.
-
-3. **Stack:**
-   - Used for the "Time Strike" move to repeat previous actions.
-
-
-## Unit Tests
-
-Unit tests have been implemented for the following functionalities:
-- Character creation and initialization.
-- Scenario loading and navigation.
-- Battle system and turn management.
-
-To run the tests, execute:
+## Testing
+### Running Tests
+Unit tests are included to ensure code reliability. To compile and run the tests, use:
 ```
 make test
 ```
 
-## Usage Tracking
-
-A dictionary structure tracks the usage count of each skill, providing insights into the most used skills during gameplay.
+### Tests Overview
+- **Character Tests**: Validate character creation and attributes.
+- **Battle Tests**: Ensure battle mechanics work as expected.
+- **Scenario Tests**: Verify scenario navigation and decision impacts.
+- **Queue Tests**: Test queue operations.
+- **Stack Tests**: Test stack operations.
