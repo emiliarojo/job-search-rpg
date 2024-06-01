@@ -28,10 +28,18 @@ test_battle: $(TEST_DIR)/test_battle.c $(OBJ_FILES)
 test_scenario: $(TEST_DIR)/test_scenario.c $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_scenario.c $(OBJ_FILES)
 
-test: test_character test_battle test_scenario
+test_queue: $(TEST_DIR)/test_queue.c $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_queue.c $(OBJ_FILES)
+
+test_stack: $(TEST_DIR)/test_stack.c $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_stack.c $(OBJ_FILES)
+
+test: test_character test_battle test_scenario test_queue test_stack
 	./test_character
 	./test_battle
 	./test_scenario
+	./test_queue
+	./test_stack
 
 clean:
-	rm -f $(OBJ_DIR)/*.o $(BIN) test_character test_battle test_scenario
+	rm -f $(OBJ_DIR)/*.o $(BIN) test_character test_battle test_scenario test_queue test_stack

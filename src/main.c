@@ -39,56 +39,72 @@ void load_game(Character *player, GraphNode **current_node, ScenarioGraph *graph
             *current_node = node;
             break;
         }
-        node = node->next[0]; // Assuming a linear traversal for simplicity
+        node = node->next[0]; // linear traversal
     }
     fclose(file);
 }
 
+// Function to display the game introduction
+void display_intro() {
+    printf("Welcome to Job Search RPG!\n\n");
+    printf("In this game, you will navigate through various job search scenarios, make decisions, and battle recruiters and interviewers.\n");
+    printf("Make strategic use of your skills to defeat enemies and progress through the game.\n");
+    printf("Good luck!\n\n");
+}
+
+// Function to display available skills for the player to choose
+void display_skills() {
+    printf("Choose 4 skills for your character:\n");
+    for (int i = 0; i < MAX_SKILLS; i++) {
+        if (strlen(skills[i].name) > 0) {
+            printf("%d. %s - %s\n", i + 1, skills[i].name, skills[i].description);
+        }
+    }
+}
+
+// Function to display the current scenario and decisions
+void display_scenario(GraphNode *current_node) {
+    printf("\n===================================================\n");
+    printf("%s: %s\n", current_node->scenario.name, current_node->scenario.description);
+    for (int i = 0; i < current_node->scenario.num_decisions; i++) {
+        printf("%d. %s\n", i + 1, current_node->scenario.decisions[i].text);
+    }
+    printf("\n===================================================\n");
+}
+
 // Main function to run the game
 int main() {
-    printf("Welcome to Job Search RPG!\n");
+    display_intro();
 
-    // Initialize the scenario graph and load scenarios
     ScenarioGraph graph;
     initialize_graph(&graph);
     Scenarios scenarios;
     load_scenarios(&scenarios, "data/scenarios.json");
 
-    // Initialize the player character and load skills
     Character player;
     load_skills("data/skills.json");
     create_character(&player);
 
-    // Load scenarios into the graph structure
     load_scenarios_into_graph(&graph, "data/scenarios.json");
 
-    // Prompt the user to start a new game or load an existing game
     int choice;
     printf("1. New Game\n2. Load Game\n");
     scanf("%d", &choice);
 
     GraphNode *current_node = NULL;
     if (choice == 2) {
-        // Load the game state if chosen
         load_game(&player, &current_node, &graph);
         if (current_node == NULL) {
             printf("Failed to load game, starting new game...\n");
             current_node = graph.head;
         }
     } else {
-        // Start a new game
         current_node = graph.head;
     }
 
-    // Main game loop
     while (current_node != NULL) {
-        // Display the current scenario and decisions
-        printf("%s: %s\n", current_node->scenario.name, current_node->scenario.description);
-        for (int i = 0; i < current_node->scenario.num_decisions; i++) {
-            printf("%d. %s\n", i + 1, current_node->scenario.decisions[i].text);
-        }
+        display_scenario(current_node);
 
-        // Get the player's decision
         int decision;
         while (1) {
             scanf("%d", &decision);
@@ -99,17 +115,14 @@ int main() {
             }
         }
 
-        // Display pre-battle text and initiate battles
-        printf("%s\n", current_node->scenario.decisions[decision - 1].pre_battle_text);
+        printf("\n%s\n", current_node->scenario.decisions[decision - 1].pre_battle_text);
         for (int i = 0; i < current_node->scenario.decisions[decision - 1].num_enemies; i++) {
             Enemy enemy = current_node->scenario.decisions[decision - 1].enemies[i];
             initiate_battle(&player, &enemy);
         }
-        printf("%s\n", current_node->scenario.decisions[decision - 1].post_battle_text);
+        printf("\n%s\n", current_node->scenario.decisions[decision - 1].post_battle_text);
 
-        // Move to the next scenario
         current_node = get_next_scenario(current_node, decision - 1);
-        // Save the game state
         save_game(&player, current_node);
     }
 

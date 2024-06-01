@@ -20,33 +20,29 @@ void initiate_battle(Character *player, Enemy *enemy) {
     int time_strike_used = 0;
 
     while (player->hp > 0 && enemy->hp > 0) {
+        printf("\n---------------------------------------------------\n");
+        printf("Player HP: %d, Enemy HP: %d\n", player->hp, enemy->hp);
+
         int current_turn = dequeue(&queue);
         if (current_turn == player_turn) {
+            display_turn_options(player, time_strike_used);
             execute_player_turn(player, enemy, &stack, &time_strike_used); // Pass the flag to check Time Strike
         } else {
             execute_enemy_turn(player, enemy);
         }
         enqueue(&queue, current_turn);
+        printf("---------------------------------------------------\n");
     }
 
     if (player->hp > 0) {
-        printf("You defeated the %s!\n", enemy->name);
+        printf("\nYou defeated the %s!\n", enemy->name);
     } else {
-        printf("You were defeated by the %s.\n", enemy->name);
+        printf("\nYou were defeated by the %s.\n", enemy->name);
     }
 }
 
 // Function to execute the player's turn
 void execute_player_turn(Character *player, Enemy *enemy, Stack *stack, int *time_strike_used) {
-    printf("Your turn! Choose a skill:\n");
-    for (int i = 0; i < player->num_skills; i++) {
-        printf("%d. %s - %s\n", i + 1, player->skills[i].name, player->skills[i].description);
-    }
-
-    if (!(*time_strike_used)) {
-        printf("%d. Time Strike\n", player->num_skills + 1);
-    }
-
     int choice;
     scanf("%d", &choice);
     choice -= 1;
@@ -111,4 +107,15 @@ void execute_enemy_turn(Character *player, Enemy *enemy) {
     }
 
     printf("%s uses %s! Your HP is now %d (Damage: %d)\n", enemy->name, skill.name, player->hp, damage);
+}
+
+// Function to display turn options
+void display_turn_options(Character *player, int time_strike_used) {
+    printf("Your turn! Choose a skill:\n");
+    for (int i = 0; i < player->num_skills; i++) {
+        printf("%d. %s - %s\n", i + 1, player->skills[i].name, player->skills[i].description);
+    }
+    if (!time_strike_used) {
+        printf("%d. Time Strike\n", player->num_skills + 1);
+    }
 }
